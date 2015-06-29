@@ -38,9 +38,75 @@ $(document).ready(function(){
             renderReadingChart();
             renderInteractiveChart();
             renderVisualChart();
+
+            renderComments();
+            renderDefaulters();
         }
 
     });
+
+    function renderComments(){
+        var sessionId = $("#sessionId").val();
+        var batchId = $("#batchId").val();
+        $.ajax({
+            url: 'admin/fbreports/getFBComments?batchId='+batchId+'&sessionId='+sessionId,
+            type: "GET",
+            dataType:"json",
+            cache: false,
+            success: function(jsonData)
+            {
+                if(jsonData.length>0){
+                    var html = "<ul>";
+                    for(var i=0; i<jsonData.length; i++){
+                         html+="<li>"+jsonData[i]["fb_comments"]+"</li>";   
+                    }
+                    html+="</ul>"
+                     $("#comments").html("");
+                     $("#comments").html(html);
+                }
+                else{
+                    $("#comments").html("None");
+                }
+
+            }
+
+        });
+    }
+
+    function renderDefaulters(){
+        var sessionId = $("#sessionId").val();
+        var batchId = $("#batchId").val();
+        $.ajax({
+            url: 'admin/fbreports/getFBDefaulters?batchId='+batchId+'&sessionId='+sessionId,
+            type: "GET",
+            dataType:"json",
+            cache: false,
+            success: function(jsonData)
+            {
+                if(jsonData.length>0){
+                    var html = "<table class='table table-striped'>";
+                    html += "<tr>";
+                    html += "<th>"+"User Name"+"</th>";
+                    html += "<th>"+"User Display Name"+"</th>";
+                    html += "</tr>";
+                    
+                    for(var i=0; i<jsonData.length; i++){
+                         html += "<tr>";
+                         html+="<td>"+jsonData[i]["user_name"]+"</td>"+"<td>"+jsonData[i]["user_display_name"]+"</td>";   
+                         html+="</tr>"
+                    }
+                    html+= "</table>";
+                     $("#defaulters").html("");
+                     $("#defaulters").html(html);
+                }
+                else{
+                    $("#defaulters").html("None");
+                }
+
+            }
+
+        });
+    }
 
 
     function renderDurationChart(){

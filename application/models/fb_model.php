@@ -30,6 +30,29 @@ class Fb_model extends CI_Model
 
     }
 
+    function get_fb_comments($sessionId, $batchId){
+        $db_str = "select user_id,
+                          fb_comments 
+                    from nacenp_fb
+                    where session_id = ? and user_batch_id = ?";
+
+
+        $query = $this->db->query($db_str, array($sessionId, $batchId));
+        return $query->result();
+    }
+
+    function get_fb_defaulters($sessionId, $batchId){
+        $db_str = "select user_name,
+                          user_display_name 
+                    from nacenp_users
+                    where user_batch_id = ?
+                     and user_id not in (select user_id from nacenp_fb where session_id = ? and user_batch_id = ?)";
+
+
+        $query = $this->db->query($db_str, array($batchId,$sessionId, $batchId));
+        return $query->result();
+    }
+
 
 
     function get_fb_duration_pie_data($sessionId, $batchId){

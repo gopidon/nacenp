@@ -38,6 +38,28 @@ class Fbreports extends CI_Controller
 
     }
 
+    function getFbComments(){
+        $loggedIn = $this->session->userdata('logged_in');
+        if($loggedIn){
+            $sessionId = $this->input->get('sessionId', true);
+            $batchId = $this->input->get('batchId', true);
+            $this->load->model('Fb_model');
+            $comments = $this->Fb_model->get_fb_comments($sessionId, $batchId);
+            echo json_encode($comments);
+        }    
+    }
+
+    function getFbDefaulters(){
+        $loggedIn = $this->session->userdata('logged_in');
+        if($loggedIn){
+            $sessionId = $this->input->get('sessionId', true);
+            $batchId = $this->input->get('batchId', true);
+            $this->load->model('Fb_model');
+            $defaulters= $this->Fb_model->get_fb_defaulters($sessionId, $batchId);
+            echo json_encode($defaulters);
+        }    
+    }
+
     function getFBDurationPieData(){
         $loggedIn = $this->session->userdata('logged_in');
         if($loggedIn){

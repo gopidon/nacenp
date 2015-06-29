@@ -29,7 +29,7 @@ aside h2 {
     page-break-after: always;
 }
 
-#content, #presentation, #relevance, #class, #reading, #interactive, #visual{
+#content, #presentation, #relevance, #class, #reading, #interactive, #visual, #comments, #defaulters{
     page-break-after: always;
 }
 

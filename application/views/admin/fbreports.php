@@ -157,6 +157,16 @@
 
 
         </div>
+        <h3>Comments<h3>
+        <hr>    
+        <div id="comments" class="row" style="margin-top:20px">
+
+        </div>       
+        <h3>Defaulters</h3>
+        <hr>
+        <div id="defaulters" class="row" style="margin-top:20px">
+
+        </div>    
 
     </div>
 
